@@ -1,5 +1,5 @@
-crawl-exhibitors.ps1
 exhibitors_base.csv
 exhibitors_enriched.csv
 exhibitors_for_directory.csv
 id_map.json
+blockparty_raw_*.html

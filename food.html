@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gen Con 2026 Block Party Food Guide</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="GenCon Food" />
+<meta name="theme-color" content="#A6742C" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23201E2E'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle'%3E%F0%9F%8C%AE%3C/text%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #EAEAF2; --surface: #FFFFFF; --surface-2: #F3F2FA; --ink: #201E2E;
+    --ink-soft: #55536A; --line: #D9D7E6; --accent: #A6742C; --accent-soft: #F1E4C8;
+    --warn: #9A3B34; --warn-soft: #F5DEDB; --safe: #3C6E5A; --safe-soft: #DCEBE3;
+    --shadow: 0 1px 2px rgba(32,30,46,0.06), 0 4px 14px rgba(32,30,46,0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15141F; --surface: #1D1B29; --surface-2: #242231; --ink: #ECEAF5;
+      --ink-soft: #B0AEC4; --line: #38364A; --accent: #D9A94D; --accent-soft: #3A311C;
+      --warn: #E2857D; --warn-soft: #3A211F; --safe: #7FBBA2; --safe-soft: #1E332A;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 18px rgba(0,0,0,0.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    line-height: 1.5; margin: 0;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 2rem 1.1rem 4rem; }
+  h1, h2 { font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif; text-wrap: balance; margin: 0; }
+
+  header.hero { margin-bottom: 1.5rem; }
+  .eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem; color: var(--ink-soft); font-weight: 600; }
+  h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-top: 0.3rem; font-weight: 600; }
+  p.sub { color: var(--ink-soft); margin-top: 0.4rem; font-size: 0.95rem; max-width: 62ch; }
+
+  .tool-nav-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.6rem; }
+  .tool-nav { font-size: 0.82rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+  .tool-nav:hover, .tool-nav:focus-visible { text-decoration: underline; }
+
+  .callout {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 1rem 1.2rem; margin: 1.2rem 0 1.8rem; box-shadow: var(--shadow);
+    font-size: 0.88rem; color: var(--ink-soft);
+  }
+  .callout strong { color: var(--ink); }
+
+  h2.section-head {
+    font-size: 1.15rem; margin: 2rem 0 0.8rem;
+    border-bottom: 2px solid var(--line); padding-bottom: 0.4rem;
+  }
+
+  .vendor {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 1rem 1.2rem; margin-bottom: 0.8rem; box-shadow: var(--shadow);
+  }
+  .vendor-top {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; flex-wrap: wrap;
+  }
+  .vendor-name { font-weight: 700; font-size: 1rem; }
+  .sponsor-chip {
+    font-size: 0.68rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px;
+    background: var(--safe-soft); color: var(--safe); white-space: nowrap;
+  }
+  .vendor-blurb { color: var(--ink-soft); font-size: 0.88rem; margin-top: 0.35rem; }
+  .menu-list { margin: 0.6rem 0 0; padding-left: 0; list-style: none; }
+  .menu-list li {
+    display: flex; justify-content: space-between; gap: 0.8rem;
+    padding: 0.3rem 0; border-bottom: 1px dashed var(--line); font-size: 0.88rem;
+  }
+  .menu-list li:last-child { border-bottom: none; }
+  .menu-item-name { color: var(--ink); }
+  .menu-item-price { color: var(--ink-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .menu-note { font-size: 0.82rem; color: var(--ink-soft); margin-top: 0.5rem; font-style: italic; }
+  .vendor-site { font-size: 0.8rem; margin-top: 0.5rem; display: inline-block; }
+  .vendor-site a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .vendor-site a:hover, .vendor-site a:focus-visible { text-decoration: underline; }
+
+  footer.notes { margin-top: 2.2rem; padding-top: 1.2rem; border-top: 1px solid var(--line); }
+  footer.notes h3 { font-size: 1rem; margin-bottom: 0.7rem; }
+  footer.notes ul { margin: 0; padding-left: 1.2rem; color: var(--ink-soft); font-size: 0.86rem; }
+  footer.notes li { margin-bottom: 0.5rem; }
+  footer.notes strong { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">South Street &middot; Gen Con Block Party</div>
+    <h1>Food &amp; Drink Guide</h1>
+    <p class="sub">Decide before you're in line. These are the confirmed recurring vendors at the Block Party (Wed&ndash;Sun, South Street east of Capitol). "Dozens of rotating food trucks" fill out the rest of the lineup and aren't announced until 1&ndash;2 weeks before the con.</p>
+    <div class="tool-nav-row">
+      <a class="tool-nav" href="index.html">Home</a>
+      <a class="tool-nav" href="schedule.html">Trip Schedule &rarr;</a>
+      <a class="tool-nav" href="exhibitors.html">Exhibitor Directory &rarr;</a>
+    </div>
+  </header>
+
+  <div class="callout">
+    <strong>Only 2 food vendors show up in Gen Con's exhibitor system</strong> (Sun King Brewery and Dee-Lucious Catering) &mdash; the rest of the Block Party is organized separately from the dealer hall. The vendors below are the 8 named "Official Sponsor" fixtures confirmed on Gen Con's own Block Party page, so they should be there all weekend. Check <a href="https://www.gencon.com/gen-con-indy/block-party" style="color:var(--accent);">gencon.com/gen-con-indy/block-party</a> again closer to July 30 for the full rotating truck roster.
+  </div>
+
+  <h2 class="section-head">🍕 Food</h2>
+
+  <div class="vendor">
+    <div class="vendor-top">
+      <div class="vendor-name">HotBox Pizza <span class="sponsor-chip">Official Pizza Sponsor</span></div>
+    </div>
+    <div class="vendor-blurb">Indianapolis-based pizzeria known for inventive specialty pies.</div>
+    <ul class="menu-list">
+      <li><span class="menu-item-name">Specialty pies (15 options)</span><span class="menu-item-price">Aloha, B-Ripp, Big Al's Fredo, Big Cheese, Chicken Ranch, Eve's Garden, Girl Next Door, Heavy Veggie, HotBox, Hot Chick, Party Fowl, Pesto Mambo, Popeye, Porky the Pie, Supreme</span></li>
+      <li><span class="menu-item-name">Build-your-own</span><span class="menu-item-price">Old School, Skinny, or Gluten-Free crust</span></li>
+      <li><span class="menu-item-name">Stix &amp; sides</span><span class="menu-item-price">Cheese Stix, Wings, Salad, Dessert</span></li>
+    </ul>
+    <div class="menu-note">Full toppings/prices weren't published on the site &mdash; check the board at the truck, or hotboxpizza.com/menu-2 for the latest.</div>
+    <div class="vendor-site"><a href="https://hotboxpizza.com" target="_blank" rel="noopener noreferrer">hotboxpizza.com &rarr;</a></div>
+  </div>
+
+  <div class="vendor">
+    <div class="vendor-top">
+      <div class="vendor-name">Harry &amp; Izzy's <span class="sponsor-chip">Official Burger Sponsor</span></div>
+    </div>
+    <div class="vendor-blurb">Downtown Indy steakhouse offshoot, since 1956.</div>
+    <ul class="menu-list">
+      <li><span class="menu-item-name">Prime Steakburger</span><span class="menu-item-price">$17</span></li>
+      <li><span class="menu-item-name">Turkey Burger</span><span class="menu-item-price">$15</span></li>
+      <li><span class="menu-item-name">Signature Sliders (filet, fried chicken, or fried shrimp)</span><span class="menu-item-price">$7 each</span></li>
+      <li><span class="menu-item-name">World Famous St. Elmo Shrimp Cocktail</span><span class="menu-item-price">$21.95</span></li>
+      <li><span class="menu-item-name">Fried Brussels Sprouts / Onion Rings / Mac &amp; Cheese</span><span class="menu-item-price">$12&ndash;13</span></li>
+    </ul>
+    <div class="vendor-site"><a href="https://www.harryandizzys.com/location/downtown-indianapolis/" target="_blank" rel="noopener noreferrer">harryandizzys.com &rarr;</a></div>
+  </div>
+
+  <div class="vendor">
+    <div class="vendor-top">
+      <div class="vendor-name">Social Cantina <span class="sponsor-chip">Official Taco Sponsor</span></div>
+    </div>
+    <div class="vendor-blurb">Modern Mexican, founded 2018 in Indianapolis.</div>
+    <ul class="menu-list">
+      <li><span class="menu-item-name">Taco of the month: Jerk Chicken</span><span class="menu-item-price">$3 (Tue special)</span></li>
+      <li><span class="menu-item-name">Esquites</span><span class="menu-item-price">$5</span></li>
+      <li><span class="menu-item-name">Chips &amp; Guacamole</span><span class="menu-item-price">$5</span></li>
+      <li><span class="menu-item-name">Margarita Pitchers</span><span class="menu-item-price">$25</span></li>
+    </ul>
+    <div class="menu-note">Full food &amp; drink menu is a PDF on their site &mdash; worth a look for the complete taco lineup.</div>
+    <div class="vendor-site"><a href="https://thesocialcantina.com/location/indianapolis/" target="_blank" rel="noopener noreferrer">thesocialcantina.com &rarr;</a></div>
+  </div>
+
+  <div class="vendor">
+    <div class="vendor-top">
+      <div class="vendor-name">Dee-Lucious Catering</div>
+    </div>
+    <div class="vendor-blurb">Indianapolis soul food &amp; catering &mdash; returning to the Block Party in 2026 (Food Truck 25).</div>
+    <ul class="menu-list">
+      <li><span class="menu-item-name">Fried Chicken</span><span class="menu-item-price">&mdash;</span></li>
+      <li><span class="menu-item-name">BBQ</span><span class="menu-item-price">&mdash;</span></li>
+      <li><span class="menu-item-name">Fried Catfish</span><span class="menu-item-price">&mdash;</span></li>
+      <li><span class="menu-item-name">Desserts</span><span class="menu-item-price">&mdash;</span></li>
+    </ul>
+    <div class="menu-note">No public menu/prices found (Facebook-only presence) &mdash; categories confirmed via Gen Con's own exhibitor listing.</div>
+    <div class="vendor-site"><a href="https://www.facebook.com/Ms.DeeLicious.SoulFood/" target="_blank" rel="noopener noreferrer">Facebook page &rarr;</a></div>
+  </div>
+
+  <h2 class="section-head">🍺 Beer &amp; Wine</h2>
+
+  <div class="vendor">
+    <div class="vendor-top">
+      <div class="vendor-name">Sun King Brewery <span class="sponsor-chip">Official Beer Sponsor</span></div>
+    </div>
+    <div class="vendor-blurb">Indiana's 2nd-largest brewery, Gen Con's beer sponsor for over a decade.</div>
+    <ul class="menu-list">
+      <li><span class="menu-item-name">Rage Quit &mdash; Official Beer of Gen Con 2026 (cherry &amp; lemon-lime ale)</span><span class="menu-item-price">4.5% ABV</span></li>
+      <li><span class="menu-item-name">Oktoberfest (German-style lager)</span><span class="menu-item-price">5.7% ABV</span></li>
+      <li><span class="menu-item-name">Pickle Beer (golden ale, pickle brine)</span><span class="menu-item-price">4.5% ABV</span></li>
+      <li><span class="menu-item-name">Corn Dog Beer (toasted corn &amp; smoked malt)</span><span class="menu-item-price">4.5% ABV</span></li>
+      <li><span class="menu-item-name">Lager Box / Hop Variety Pack</span><span class="menu-item-price">variety packs</span></li>
+      <li><span class="menu-item-name">Mocktails &amp; seltzer</span><span class="menu-item-price">non-alcoholic options available</span></li>
+    </ul>
+    <div class="vendor-site"><a href="https://www.sunkingbrewing.com" target="_blank" rel="noopener noreferrer">sunkingbrewing.com &rarr;</a></div>
+  </div>
+
+  <div class="vendor">
+    <div class="vendor-top">
+      <div class="vendor-name">Daniel's Vineyard <span class="sponsor-chip">Official Wine Sponsor</span></div>
+    </div>
+    <div class="vendor-blurb">Indiana-grown wine, full production winery in McCordsville.</div>
+    <div class="menu-note">Specific wine list wasn't accessible on the site (PDF-only menu) &mdash; expect exclusive blends from Indiana-grown vines. Call (317) 248-5222 or check the menu link below.</div>
+    <div class="vendor-site"><a href="https://danielsvineyard.com/menu" target="_blank" rel="noopener noreferrer">danielsvineyard.com/menu &rarr;</a></div>
+  </div>
+
+  <h2 class="section-head">🥤 Soda &amp; Coffee</h2>
+
+  <div class="vendor">
+    <div class="vendor-top">
+      <div class="vendor-name">Critical Hit Soda <span class="sponsor-chip">Official Mocktail Sponsor</span></div>
+    </div>
+    <div class="vendor-blurb">Build-your-own fantasy-themed soda, by the "Level" (cup size).</div>
+    <ul class="menu-list">
+      <li><span class="menu-item-name">Level 1</span><span class="menu-item-price">24 oz</span></li>
+      <li><span class="menu-item-name">Level 5</span><span class="menu-item-price">32 oz</span></li>
+      <li><span class="menu-item-name">Level 10</span><span class="menu-item-price">44 oz</span></li>
+    </ul>
+    <div class="menu-note">7 base sodas (Pepsi, Mountain Dew, Root Beer, Sierra Mist, Dr Pepper, Lemonade, Energy Drink) &times; 40+ mix-in flavors (butterscotch, lychee, huckleberry, blood orange, and more) &mdash; fully customizable, worth deciding your base + 1&ndash;2 flavors ahead of time.</div>
+    <div class="vendor-site"><a href="https://criticalhitsoda.com/menu/" target="_blank" rel="noopener noreferrer">criticalhitsoda.com/menu &rarr;</a></div>
+  </div>
+
+  <div class="vendor">
+    <div class="vendor-top">
+      <div class="vendor-name">Wild Bill's Soda</div>
+    </div>
+    <div class="vendor-blurb">Veteran-owned, "slow sippin'" cane-sugar craft soda. Collectible Gen Con souvenir mugs with unlimited refills.</div>
+    <ul class="menu-list">
+      <li><span class="menu-item-name">Flavors</span><span class="menu-item-price">Sparkling Lemonade, Rocket Pop, Root Beer, Ring Pop Blue Raspberry, Black Cherry, Ginger Ale, Orange Cream, Vanilla Cream, Original Cola, Pineapple (zero sugar)</span></li>
+    </ul>
+    <div class="vendor-site"><a href="https://drinkwildbills.com" target="_blank" rel="noopener noreferrer">drinkwildbills.com &rarr;</a></div>
+  </div>
+
+  <div class="vendor">
+    <div class="vendor-top">
+      <div class="vendor-name">Helm Coffee Roasters</div>
+    </div>
+    <div class="vendor-blurb">LGBTQ+ women-owned Indianapolis roaster, serving specialty coffee in official Gen Con cans.</div>
+    <div class="menu-note">Their site is mostly retail whole-bean sales, not a drink menu &mdash; expect brewed coffee at the booth itself, likely similar to their rotating single-origin lineup.</div>
+    <div class="vendor-site"><a href="https://helmcoffeeroasters.com" target="_blank" rel="noopener noreferrer">helmcoffeeroasters.com &rarr;</a></div>
+  </div>
+
+  <footer class="notes">
+    <h3>Before you go</h3>
+    <ul>
+      <li><strong>Location:</strong> South Street, both sides, east of Capitol Ave &mdash; walking distance from ICC.</li>
+      <li><strong>Days:</strong> Wednesday through Sunday during Gen Con (July 29&ndash;Aug 2, 2026).</li>
+      <li><strong>Rotating trucks:</strong> the full daily lineup (dozens of trucks) isn't set until 1&ndash;2 weeks before the con, and truck order isn't decided until the morning of. Re-check <a href="https://www.gencon.com/gen-con-indy/block-party" style="color:var(--accent);">the official page</a> the week before you leave.</li>
+      <li><strong>Menu detail gaps:</strong> several vendors (HotBox specific toppings, Daniel's Vineyard wine list, Dee-Lucious pricing) only publish a PDF or in-person board &mdash; links are above if you want to dig further before the trip.</li>
+    </ul>
+  </footer>
+
+</div>
+</body>
+</html>

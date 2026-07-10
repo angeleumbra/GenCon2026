@@ -96,6 +96,34 @@ foreach ($name in $existing.Keys) {
 Write-Output ("Booth/location changes: " + $boothChanges.Count)
 $boothChanges | ForEach-Object { Write-Output ("  * " + $_) }
 
+Write-Output "=== Checking Firebase for picks on removed exhibitors ==="
+$removedButPicked = @()
+if ($removedNames.Count -gt 0) {
+    try {
+        $picksData = Invoke-RestMethod -Uri "https://gencon2026-default-rtdb.firebaseio.com/picks.json" -Method Get -TimeoutSec 15
+        if ($picksData) {
+            $picksByName = @{}
+            foreach ($prop in $picksData.PSObject.Properties) {
+                $record = $prop.Value
+                if ($record -and $record.name) { $picksByName[$record.name] = $record.people }
+            }
+            foreach ($name in $removedNames) {
+                if ($picksByName.ContainsKey($name)) {
+                    $removedButPicked += [PSCustomObject]@{ Name = $name; People = $picksByName[$name] }
+                }
+            }
+        }
+    } catch {
+        Write-Output ("  Could not reach Firebase to check picks: " + $_.Exception.Message)
+    }
+}
+if ($removedButPicked.Count -gt 0) {
+    Write-Output ("!!! WARNING: " + $removedButPicked.Count + " removed exhibitor(s) had picks on them:")
+    $removedButPicked | ForEach-Object { Write-Output ("  ! " + $_.Name + " (picked by: " + ($_.People -join ", ") + ")") }
+} else {
+    Write-Output "No picked exhibitors were removed. Nothing lost."
+}
+
 Write-Output "=== Step 3: Rebuilding dataset ==="
 $updated = @()
 foreach ($name in $existing.Keys) {
@@ -107,6 +135,9 @@ foreach ($name in $existing.Keys) {
         $row.Tags = $live[$name].Tags
         $row.Sponsor = $live[$name].Sponsor
     }
+    # IsNew reflects only the most recent refresh - clear any stale flag from a prior run
+    if ($row.PSObject.Properties.Name -contains 'IsNew') { $row.IsNew = "False" }
+    else { $row | Add-Member -NotePropertyName IsNew -NotePropertyValue "False" }
     $updated += $row
 }
 foreach ($name in $newNames) {
@@ -114,7 +145,7 @@ foreach ($name in $newNames) {
     $updated += [PSCustomObject]@{
         Name = $l.Name; Type = $l.Type; Zone = $l.Zone; Booths = $l.Booths
         Tags = $l.Tags; Sponsor = $l.Sponsor; Title = ""
-        Description = ""; Website = ""
+        Description = ""; Website = ""; IsNew = "True"
     }
 }
 
@@ -155,14 +186,35 @@ $newCount = $forDirectory.Count
 $html = $html -replace 'All \d+ non-food exhibiting', "All $newCount non-food exhibiting"
 $html = $html -replace 'id="count-tag">\d+ shown', "id=`"count-tag`">$newCount shown"
 
+# Build and embed the changelog (new/removed/removed-but-picked) shown on the page itself
+$changelog = [PSCustomObject]@{
+    refreshedAt = (Get-Date -Format "yyyy-MM-dd")
+    newExhibitors = @($newNames)
+    removedExhibitors = @($removedNames)
+    removedButPicked = @($removedButPicked | ForEach-Object { [PSCustomObject]@{ name = $_.Name; people = @($_.People) } })
+}
+$changelogJson = $changelog | ConvertTo-Json -Depth 5 -Compress
+$changelogJson | Set-Content -Path (Join-Path $root "changelog.json") -Encoding UTF8 -NoNewline
+
+$clIdx = $html.IndexOf('var CHANGELOG = ')
+if ($clIdx -ge 0) {
+    $clEndIdx = $html.IndexOf(';', $clIdx) + 1
+    $html = $html.Substring(0, $clIdx) + 'var CHANGELOG = ' + $changelogJson + ';' + $html.Substring($clEndIdx)
+} else {
+    # First time - insert right after CSV_B64 decode line
+    $anchor = 'var csvText = decodeURIComponent(escape(atob(CSV_B64)));'
+    $html = $html.Replace($anchor, $anchor + "`n  var CHANGELOG = " + $changelogJson + ';')
+}
+
 Set-Content -Path $htmlPath -Value $html -Encoding UTF8 -NoNewline
-Write-Output "exhibitors.html updated."
+Write-Output "exhibitors.html updated (data + changelog)."
 
 if ($Push) {
     Write-Output "=== Step 6: Committing and pushing ==="
     Set-Location $root
-    git add exhibitors.html
+    git add exhibitors.html changelog.json
     $msg = "Refresh exhibitor data: +$($newNames.Count) new, -$($removedNames.Count) removed, $($boothChanges.Count) booth changes"
+    if ($removedButPicked.Count -gt 0) { $msg += ", $($removedButPicked.Count) removed-but-picked" }
     git commit -m $msg
     git push
     Write-Output "Pushed to GitHub."
@@ -176,3 +228,9 @@ Write-Output ("New exhibitors: " + $newNames.Count)
 Write-Output ("Removed exhibitors: " + $removedNames.Count)
 Write-Output ("Booth changes: " + $boothChanges.Count)
 Write-Output ("Total in directory now: " + $forDirectory.Count)
+if ($removedButPicked.Count -gt 0) {
+    Write-Output ""
+    Write-Output "*** ACTION NEEDED: someone's picks were on exhibitors that dropped out ***"
+    $removedButPicked | ForEach-Object { Write-Output ("  " + $_.Name + " -- picked by " + ($_.People -join ", ")) }
+    Write-Output "This is also now shown as a banner on the exhibitors.html page itself."
+}

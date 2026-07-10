@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gen Con 2026 Toolkit</title>
+<style>
+  :root {
+    --bg: #EAEAF2;
+    --surface: #FFFFFF;
+    --ink: #201E2E;
+    --ink-soft: #55536A;
+    --line: #D9D7E6;
+    --accent: #A6742C;
+    --accent-soft: #F1E4C8;
+    --shadow: 0 1px 2px rgba(32,30,46,0.06), 0 4px 14px rgba(32,30,46,0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15141F; --surface: #1D1B29; --ink: #ECEAF5;
+      --ink-soft: #B0AEC4; --line: #38364A; --accent: #D9A94D; --accent-soft: #3A311C;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 18px rgba(0,0,0,0.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+  }
+  .wrap { max-width: 480px; width: 100%; }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem;
+    color: var(--ink-soft); font-weight: 600;
+  }
+  h1 {
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    font-size: clamp(1.6rem, 5vw, 2.1rem);
+    margin: 0.35rem 0 1.5rem;
+  }
+  .card {
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 0.9rem;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .card:hover, .card:focus-visible { border-color: var(--accent); }
+  .card .name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card .name .arrow { color: var(--accent); }
+  .card .desc { color: var(--ink-soft); font-size: 0.88rem; margin-top: 0.35rem; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="eyebrow">Indianapolis &middot; July 29&ndash;Aug 2, 2026</div>
+    <h1>Gen Con 2026 Toolkit</h1>
+
+    <a class="card" href="schedule.html">
+      <div class="name">Trip Schedule <span class="arrow">&rarr;</span></div>
+      <div class="desc">Day-by-day itinerary, purchased tickets, and budget tracker.</div>
+    </a>
+
+    <a class="card" href="exhibitors.html">
+      <div class="name">Exhibitor Directory <span class="arrow">&rarr;</span></div>
+      <div class="desc">All 731 exhibitors with descriptions, websites, and per-person interest tags.</div>
+    </a>
+  </div>
+</body>
+</html>

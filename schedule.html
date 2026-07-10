@@ -1,0 +1,495 @@
+<style>
+  :root {
+    --bg: #EAEAF2;
+    --surface: #FFFFFF;
+    --surface-2: #F3F2FA;
+    --ink: #201E2E;
+    --ink-soft: #55536A;
+    --line: #D9D7E6;
+    --accent: #A6742C;
+    --accent-soft: #F1E4C8;
+    --warn: #9A3B34;
+    --warn-soft: #F5DEDB;
+    --safe: #3C6E5A;
+    --safe-soft: #DCEBE3;
+    --shadow: 0 1px 2px rgba(32,30,46,0.06), 0 4px 14px rgba(32,30,46,0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15141F;
+      --surface: #1D1B29;
+      --surface-2: #242231;
+      --ink: #ECEAF5;
+      --ink-soft: #B0AEC4;
+      --line: #38364A;
+      --accent: #D9A94D;
+      --accent-soft: #3A311C;
+      --warn: #E2857D;
+      --warn-soft: #3A211F;
+      --safe: #7FBBA2;
+      --safe-soft: #1E332A;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 18px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15141F; --surface: #1D1B29; --surface-2: #242231; --ink: #ECEAF5;
+    --ink-soft: #B0AEC4; --line: #38364A; --accent: #D9A94D; --accent-soft: #3A311C;
+    --warn: #E2857D; --warn-soft: #3A211F; --safe: #7FBBA2; --safe-soft: #1E332A;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 18px rgba(0,0,0,0.35);
+  }
+  :root[data-theme="light"] {
+    --bg: #EAEAF2; --surface: #FFFFFF; --surface-2: #F3F2FA; --ink: #201E2E;
+    --ink-soft: #55536A; --line: #D9D7E6; --accent: #A6742C; --accent-soft: #F1E4C8;
+    --warn: #9A3B34; --warn-soft: #F5DEDB; --safe: #3C6E5A; --safe-soft: #DCEBE3;
+    --shadow: 0 1px 2px rgba(32,30,46,0.06), 0 4px 14px rgba(32,30,46,0.05);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+
+  h1, h2, h3 { font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif; text-wrap: balance; margin: 0; }
+
+  header.hero {
+    margin-bottom: 2rem;
+  }
+  .tool-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: 0.6rem;
+  }
+  .tool-nav:hover, .tool-nav:focus-visible { text-decoration: underline; }
+  header.hero .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  header.hero h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-top: 0.35rem;
+    font-weight: 600;
+  }
+  header.hero p.sub {
+    color: var(--ink-soft);
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    max-width: 60ch;
+  }
+
+  .budget-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.1rem 1.3rem;
+    margin-top: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  .budget-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .budget-row .label { font-size: 0.85rem; color: var(--ink-soft); }
+  .budget-row .value {
+    font-variant-numeric: tabular-nums;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .budget-row .value small { font-size: 0.85rem; font-weight: 500; color: var(--ink-soft); }
+  .bar-track {
+    margin-top: 0.65rem;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--safe));
+  }
+  .budget-note { font-size: 0.82rem; color: var(--ink-soft); margin-top: 0.6rem; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.2rem;
+    margin: 1.4rem 0 2.2rem;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .badge.warn { background: var(--warn-soft); color: var(--warn); }
+  .badge.safe { background: var(--safe-soft); color: var(--safe); }
+  .badge.bought { background: var(--safe); color: var(--surface); }
+
+  section.day {
+    margin-bottom: 2.4rem;
+  }
+  .day-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 2px solid var(--line);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.9rem;
+    flex-wrap: wrap;
+  }
+  .day-head h2 { font-size: 1.3rem; }
+  .day-head .zone {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .day-head .daytotal {
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .event {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 0.65rem;
+    box-shadow: var(--shadow);
+  }
+  .event.alt {
+    background: transparent;
+    border: 1px dashed var(--line);
+    box-shadow: none;
+    opacity: 0.92;
+  }
+  .event-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .event-title {
+    font-weight: 700;
+    font-size: 0.98rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+  }
+  .event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.9rem;
+    margin-top: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .event-meta strong { color: var(--ink); font-weight: 600; }
+  .cost-pill {
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .seats {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  .seats.low { color: var(--warn); font-weight: 600; }
+  .alt-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+
+  footer.notes {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  footer.notes h3 { font-size: 1.05rem; margin-bottom: 0.8rem; }
+  footer.notes ul { margin: 0; padding-left: 1.2rem; color: var(--ink-soft); font-size: 0.88rem; }
+  footer.notes li { margin-bottom: 0.5rem; }
+  footer.notes strong { color: var(--ink); }
+
+  @media (max-width: 520px) {
+    .day-head { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+  }
+
+  @media print {
+    :root {
+      --bg: #FFFFFF; --surface: #FFFFFF; --surface-2: #F4F4F4; --ink: #111111;
+      --ink-soft: #444444; --line: #CCCCCC; --accent: #8A5A1E; --accent-soft: #F1E4C8;
+      --warn: #7A2A24; --warn-soft: #F5DEDB; --safe: #2F5A48; --safe-soft: #DCEBE3;
+      --shadow: none;
+    }
+    body { background: #fff; }
+    .wrap { max-width: 100%; padding: 0.5rem 0.25rem; }
+    .event, .budget-card { box-shadow: none; border: 1px solid var(--line); }
+    section.day, .event { break-inside: avoid; }
+    .event.alt { border: 1px dashed #999; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Indianapolis · July 29 &ndash; August 2, 2026</div>
+    <h1>Gen Con 2026 &mdash; Family Schedule</h1>
+    <p class="sub">Two adults + daughter (12, tall for her age &amp; cleared for Teen-rated tables). Medium pace, geographically clustered, budget-tracked.</p>
+    <a class="tool-nav" href="exhibitors.html">Exhibitor Directory &rarr;</a>
+
+    <div class="budget-card">
+      <div class="budget-row">
+        <span class="label">Event tickets, full plan below</span>
+        <span class="value">$244 <small>/ $500 cap</small></span>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width: 49%;"></div></div>
+      <p class="budget-note">6 events (marked ✓ Bought) are confirmed purchased for all three of you. $256 of headroom left on the rest, which is all optional &mdash; buy as energy allows, skip what you don't.</p>
+    </div>
+
+    <div class="legend">
+      <span><span class="badge bought">✓ Bought</span> Tickets confirmed for all 3 of you</span>
+      <span><span class="badge warn">⚠ 13+</span> Teen-rated, no ID checks expected but officially age-gated</span>
+      <span><span class="badge safe">6+</span> Everyone, zero risk</span>
+      <span>Dashed card = optional, not yet purchased</span>
+    </div>
+  </header>
+
+  <section class="day">
+    <div class="day-head">
+      <h2>Wed, Jul 29 &mdash; Preview Night</h2>
+      <span class="zone">Arrival &amp; settle in</span>
+      <span class="daytotal">$0</span>
+    </div>
+    <div class="event">
+      <div class="event-top">
+        <div class="event-title">No ticketed events available this day</div>
+      </div>
+      <div class="event-meta">Confirmed across RPG, LARP, painting, and TCG categories &mdash; nothing runs Wednesday except badge pickup. Good arrival buffer: unpack, grab dinner, scope Union Station area, sleep early.</div>
+    </div>
+  </section>
+
+  <section class="day">
+    <div class="day-head">
+      <h2>Thu, Jul 30</h2>
+      <span class="zone">ICC Hall B &rarr; Indiana Repertory Theater</span>
+      <span class="daytotal">$72</span>
+    </div>
+
+    <div class="event">
+      <div class="event-top">
+        <div class="event-title">Tower of Gygarn &mdash; Kill It, Keep It: Beholder <span class="badge safe">6+</span></div>
+        <span class="cost-pill">$10/ea &middot; $30</span>
+      </div>
+      <div class="event-meta">
+        <span><strong>10:00&ndash;12:00pm</strong> &middot; 2 hrs</span>
+        <span>ICC Hall B</span>
+        <span class="seats">16/21 seats open</span>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="event-top">
+        <div class="event-title">⚠ Dungeons &amp; Dragons: The Twenty-Sided Tavern <span class="badge warn">13+</span> <span class="badge bought">✓ Bought</span></div>
+        <span class="cost-pill">$14/ea &middot; $42</span>
+      </div>
+      <div class="event-meta">
+        <span><strong>1:00&ndash;3:30pm</strong> &middot; 2.5 hrs</span>
+        <span>Indiana Repertory Theater</span>
+        <span class="seats">454/470 open</span>
+      </div>
+      <div class="event-meta">The road-show version you already saw and loved &mdash; this is the official WOTC touring production, audience picks the heroes' choices live.</div>
+    </div>
+
+    <div class="event alt">
+      <span class="alt-label">Flexible / unticketed</span>
+      <div class="event-top">
+        <div class="event-title">Exhibit Hall browsing</div>
+      </div>
+      <div class="event-meta">Open 10am&ndash;6pm, no ticket needed. Good late-afternoon slot for dad to scout Entrepreneurs Avenue (indie publishers) and the main halls (Asmodee, Stonemaier, WizKids, Paizo).</div>
+    </div>
+  </section>
+
+  <section class="day">
+    <div class="day-head">
+      <h2>Fri, Jul 31</h2>
+      <span class="zone">ICC 500 Ballroom &rarr; Indiana Repertory Theater</span>
+      <span class="daytotal">$36</span>
+    </div>
+
+    <div class="event">
+      <div class="event-top">
+        <div class="event-title">The Great Gooey Dungeon Game Show <span class="badge safe">6+</span> <span class="badge bought">✓ Bought</span></div>
+        <span class="cost-pill">$4/ea &middot; $12</span>
+      </div>
+      <div class="event-meta">
+        <span><strong>9:00&ndash;11:00am</strong> &middot; 2 hrs</span>
+        <span>ICC 500 Ballroom</span>
+        <span class="seats">607/950 open</span>
+      </div>
+      <div class="event-meta">Celebrity-guest RPG game show built around a huge Dwarven Forge dungeon &mdash; audience prize giveaways up to $200, no experience needed, whole family can watch together.</div>
+    </div>
+
+    <div class="event">
+      <div class="event-top">
+        <div class="event-title">⚠ Dungeon Dare: Web of the Red Wizards <span class="badge warn">13+</span> <span class="badge bought">✓ Bought</span></div>
+        <span class="cost-pill">$8/ea &middot; $24</span>
+      </div>
+      <div class="event-meta">
+        <span><strong>1:00&ndash;2:00pm</strong> &middot; 1 hr</span>
+        <span>Indiana Rep Theater, Cabaret Rm (3rd fl)</span>
+        <span class="seats">12/20 open</span>
+      </div>
+      <div class="event-meta">Short escape-room-style D&amp;D dare, same building as Thursday's flagship &mdash; different format, good variety without a repeat.</div>
+    </div>
+
+    <div class="event alt">
+      <span class="alt-label">Flexible / free</span>
+      <div class="event-top">
+        <div class="event-title">Cosplay 201: Level Up Your Making! (seminar)</div>
+      </div>
+      <div class="event-meta">
+        <span><strong>4:00&ndash;5:00pm</strong></span>
+        <span>Stadium, Meeting Room 8</span>
+        <span>Free</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="day">
+    <div class="day-head">
+      <h2>Sat, Aug 1</h2>
+      <span class="zone">Marriott / JW Marriott cluster</span>
+      <span class="daytotal">$88</span>
+    </div>
+
+    <div class="event">
+      <div class="event-top">
+        <div class="event-title">Titanskeep: The Blaggard's Dare Heist <span class="badge safe">6+</span> <span class="badge bought">✓ Bought</span></div>
+        <span class="cost-pill">$8/ea &middot; $24</span>
+      </div>
+      <div class="event-meta">
+        <span><strong>10:00&ndash;11:30am</strong></span>
+        <span>Marriott, Indiana Ballroom C&ndash;D</span>
+        <span class="seats">18/18 open</span>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="event-top">
+        <div class="event-title">Dungeon Crawl &mdash; Adventurer (LARP) <span class="badge safe">6+</span> <span class="badge bought">✓ Bought</span></div>
+        <span class="cost-pill">$16/ea &middot; $48</span>
+      </div>
+      <div class="event-meta">
+        <span><strong>3:30&ndash;5:00pm</strong> &middot; 90 min</span>
+        <span>Marriott, Indiana Ballroom F&ndash;G &mdash; same building as this morning</span>
+        <span class="seats low">Sold out to new buyers &mdash; you're already in</span>
+      </div>
+      <div class="event-meta">Boffer-combat dungeon delve, no experience needed. Cheaper "Monster" role also available at $6/ea if she'd rather play the villain side.</div>
+    </div>
+
+    <div class="event">
+      <div class="event-top">
+        <div class="event-title">Choose &amp; Paint a Miniature <span class="badge safe">6+</span></div>
+        <span class="cost-pill">$8/ea &middot; $16 (mom + daughter)</span>
+      </div>
+      <div class="event-meta">
+        <span><strong>6:00&ndash;7:00pm</strong> &middot; 1 hr</span>
+        <span>Room TBD (not yet published)</span>
+      </div>
+      <div class="event-meta">Pick-a-mini format, likely D&amp;D/Reaper stock. Swapped in for the $80 dragon class to bank $144 &mdash; room assignments for this category aren't live yet, re-check closer to the date.</div>
+    </div>
+
+    <div class="event alt">
+      <span class="alt-label">Optional 2nd show if you want more, ⚠ 13+</span>
+      <div class="event-top">
+        <div class="event-title">Rhys Darby &amp; Steve Wrigley in Dungeons and Darby</div>
+        <span class="cost-pill">$20/ea &middot; $60</span>
+      </div>
+      <div class="event-meta">
+        <span><strong>12:00&ndash;2:00pm</strong></span>
+        <span>ICC 500 Ballroom</span>
+        <span class="seats">599/925 open</span>
+      </div>
+      <div class="event-meta">Celebrity comedy D&amp;D show. Adding this pushes the day to a fuller pace &mdash; only add if energy allows.</div>
+    </div>
+  </section>
+
+  <section class="day">
+    <div class="day-head">
+      <h2>Sun, Aug 2</h2>
+      <span class="zone">Marriott, light day before travel</span>
+      <span class="daytotal">$48</span>
+    </div>
+
+    <div class="event">
+      <div class="event-top">
+        <div class="event-title">Dungeon Crawl &mdash; Adventurer (LARP) <span class="badge safe">6+</span> <span class="badge bought">✓ Bought</span></div>
+        <span class="cost-pill">$16/ea &middot; $48</span>
+      </div>
+      <div class="event-meta">
+        <span><strong>12:00&ndash;1:30pm</strong></span>
+        <span>Marriott, Indiana Ballroom F&ndash;G</span>
+        <span class="seats">8/10 open &mdash; best availability all weekend</span>
+      </div>
+    </div>
+
+    <div class="event alt">
+      <span class="alt-label">Flexible / unticketed</span>
+      <div class="event-top">
+        <div class="event-title">Morning free, then Exhibit Hall before it closes early</div>
+      </div>
+      <div class="event-meta">Tower of Gaxx (10&ndash;12) and the Lorcana Ink Sprint (1:00&ndash;2:30) both got dropped &mdash; each overlapped your confirmed 12:00&ndash;1:30 Dungeon Crawl ticket with zero realistic travel time between buildings. Exhibit Hall is open 10am&ndash;4pm Sunday (shorter than other days) &mdash; good use of the now-open morning and afternoon.</div>
+    </div>
+  </section>
+
+  <footer class="notes">
+    <h3>Before you book</h3>
+    <ul>
+      <li><strong>Book fast on what's left.</strong> Registration opened May 17 and it's now July 9 &mdash; seat counts above are today's snapshot and only decrease from here.</li>
+      <li><strong>Already sold out, worth watching for releases:</strong> MTG "Learn to Play with Foundations," both Gen Con Costume Contest tiers, Cosplay Cabaret, Rikk's Cantina Corellia Star Wars LARP. Tickets sometimes free up as other attendees rebook.</li>
+      <li><strong>Painting room assignments</strong> aren't published yet for any Miniature Hobby Event, including the Saturday dragon class &mdash; check back closer to July 29 and note the room once it posts.</li>
+      <li><strong>Dealer hall hours:</strong> 10am&ndash;6pm Thu/Fri/Sat, 10am&ndash;4pm Sun (shorter). No ticket needed, badge only. Ask the Gen Con app's exhibitor filter closer to the date for a printable booth checklist by publisher.</li>
+      <li><strong>Free cosplay seminars</strong> worth slotting into any gap: "Sticky Stuff: Glues for Cosplay" (Thu), "Cosplaying with Puppets" (Fri), "Cosplaying Do's &amp; Don'ts" (Sat, ICC Rm 212, hands-on).</li>
+      <li><strong>Gentler LARP alternative:</strong> if Dungeon Crawl's combat focus isn't the vibe on a given day, Bramblewood: A Wind in the Willows LARP (Sat 1&ndash;5pm, $22/ea, Union Station Nickel Plate Rm, 27/32 open) is a cozy, low-stakes, explicitly family-friendly swap &mdash; Everyone 6+.</li>
+    </ul>
+  </footer>
+
+</div>
